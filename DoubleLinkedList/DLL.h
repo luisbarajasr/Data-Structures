@@ -59,7 +59,7 @@ void DLL<T>::printList(){
     DLLNode<T> *temporalPtr = head; 
 
     while( temporalPtr != nullptr ){
-        cout<< temporalPtr->value<< " "; 
+        cout<< temporalPtr->data<< " "; 
         temporalPtr = temporalPtr->next; 
     }
     cout<<endl; 
@@ -73,8 +73,8 @@ void DLL<T>::addFirst(T value){
         head = tail = newDLLNode; 
     }
     else{
-        newDLLNode-> = head; 
-        head->prev = newDLLNode; 
+        newDLLNode-> next= head; 
+        head->previous = newDLLNode; 
         head = newDLLNode; 
     }
     numElements++; 
@@ -91,7 +91,7 @@ void DLL<T>::addLast(T value){
     else{
       DLLNode<T> *newDLLNode = new DLLNode<T>(value); 
       tail->next = newDLLNode; 
-      newDLLNode->prev = tail; 
+      newDLLNode->previous = tail; 
       tail = newDLLNode;   
     }
     numElements++; 
@@ -150,7 +150,7 @@ bool DLL<T>::deleteAt(int position){
     if(position < 0 || position >= numElements){   
         throw out_of_range("Index out of range"); 
     }
-    else if( postion == 0){
+    else if( position == 0){
 
         DLLNode<T> *temporal = head; 
 
@@ -241,7 +241,7 @@ void DLL<T>:: updateData(T value, T newValue){
     }
 
     if(temporal == nullptr){
-        throw out_of_range("No value found.")
+        throw out_of_range("No value found.");
     }
 }
 
