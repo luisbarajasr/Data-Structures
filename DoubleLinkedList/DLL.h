@@ -198,4 +198,34 @@ bool DLL<T>::deleteAt(int position){
     }
 }
 
+template<class T> 
+T DLL<T>::getData(int position){
+    
+    if(position < 0 || position >= numElements){
+        throw out_of_range("Index out of range"); 
+    }
+    else{
+
+        if(position == 0){
+            return head->data; 
+        }
+        
+        DLLNode<T> *temporal = head; 
+        int index = 0; 
+
+        while(index != position){
+
+            if(index == position){
+                return temporal->data; 
+            }
+            index++; 
+            temporal = temporal->next; 
+        }
+
+        return -1; 
+    }
+}
+
+
+
 #endif //DLL_H_
