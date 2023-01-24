@@ -20,7 +20,7 @@ class DLL{
     void addFirst(T value); 
     void addLast(T value); 
     bool deleteData(T value); 
-    bool deleteAt(T value); 
+    bool deleteAt(int position); 
     T getData(int position); 
     void updateData(T value, T newValue); 
 
@@ -142,6 +142,60 @@ bool DLL<T>::deleteData(T value){
     }
 }
 
+template<class T> 
+bool DLL<T>::deleteAt(int position){
 
+    bool state = false; 
+
+    if(position < 0 || position >= numElements){   
+        throw out_of_range("Index out of range"); 
+    }
+    else if( postion == 0){
+
+        DLLNode<T> *temporal = head; 
+
+        //if DLL contains just one node
+        if(head != nullptr && head->next == nullptr){
+            head = nullptr; 
+            tail = nullptr; 
+        }
+        else{
+            head = temporal->next; 
+            head->previous = nullptr; 
+        }
+        delete temporal; 
+        numElements--; 
+        state = true; 
+        return state; 
+    }
+    else { //is position > 0
+
+        DLLNode<T> *temporal = head; 
+        DLLNode<T> *temporal2 = nullptr; 
+
+        int index = 0;
+
+        while( index != position){ //keep looking por the index 
+
+            temporal2 = temporal; 
+            temporal = temporal->next; 
+            index++; 
+        }
+
+        if( temporal->next == nullptr){
+            temporal2->next = nullptr; 
+            tail = temporal2; 
+        }
+        else{
+            temporal2->next = temporal->next; 
+            temporal->next->previous = temporal2; 
+        }
+
+        delete temporal; 
+        numElements--; 
+        state = true; 
+        return state; 
+    }
+}
 
 #endif //DLL_H_
