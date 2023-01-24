@@ -226,6 +226,25 @@ T DLL<T>::getData(int position){
     }
 }
 
+template<class T> 
+void DLL<T>:: updateData(T value, T newValue){
+
+    DLLNode<T> *temporal = head; 
+
+    while(temporal != nullptr){
+
+        if(temporal->data == value){
+            temporal->data = newValue; 
+            break; 
+        }
+        temporal = temporal->next; 
+    }
+
+    if(temporal == nullptr){
+        throw out_of_range("No value found.")
+    }
+}
+
 
 
 #endif //DLL_H_
